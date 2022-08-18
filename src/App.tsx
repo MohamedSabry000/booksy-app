@@ -10,6 +10,7 @@ import Book from './screens/book/Book';
 import Error from './screens/error/Error';
 import Favourites from './screens/fav/Favourites';
 import Navbar from './components/nav/Navbar';
+import Store from './screens/store/Store';
 
 
 function App() {
@@ -36,6 +37,8 @@ function App() {
       : <>
           <Route index element={<Home />} />
           <Route path="book/:id" element={<Book />} />
+          <Route path="books" element={<Store />} />
+          <Route path="shelves/:shelfName" element={<Store />} />
           <Route path="fav" element={<Favourites />} />
         </>
       }
