@@ -18,7 +18,7 @@ function App() {
 
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(resetBooks());
+    // dispatch(resetBooks());
 
     getGutendex().then(data => {
       dispatch(setBooksy(data));

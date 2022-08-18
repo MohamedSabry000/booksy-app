@@ -3,23 +3,27 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { IBook, IGutendex } from '../../@types/gutendex'
 
 export interface BooksyState {
-  count: number,
-  next: string,
-  previous: string,
-  results: Array<IBook>,
-  allResults: Array<IBook>,
-  allCategories: Array<{
+  apiPage: number,
+  count: number,  // total number of results
+  next: string,  // url for next page of results
+  previous: string, // url for previous page of results
+  results: Array<IBook>, // array of books
+  allResults: Array<IBook>, // array of all books
+  allCategories: Array<{  // array of all categories
     name: string,
     books: Array<IBook>,
   }>,
+  favourites: Array<IBook>, // array of favourite books
 }
 const initialState: BooksyState = {
+  apiPage: 1,
   count: 0,
   next: '',
   previous: '',
   results: [],
   allResults: [],
   allCategories: [],
+  favourites: [],
 }
 
 export const booksySlice = createSlice({
@@ -27,15 +31,18 @@ export const booksySlice = createSlice({
   initialState,
   reducers: {
     resetBooks: (state) => {
+      state.apiPage = 1
       state.count = 0
       state.next = ''
       state.previous = ''
       state.results = []
       state.allResults = []
       state.allCategories = []
+      state.favourites = []
     },
     setBooksy: (state, action: PayloadAction<IGutendex>) => {
       const { count, next, previous, results } = action.payload
+      state.apiPage += 1
       state.count = count
       state.next = next
       state.previous = previous
@@ -57,9 +64,11 @@ export const booksySlice = createSlice({
     },
     addResults: (state, action: PayloadAction<IGutendex>) => {
       const { count, next, previous, results } = action.payload
+      console.log(action.payload)
+      state.apiPage += 1
       state.next = next
       state.previous = previous
-      state.allResults = {...state.allResults, ...results}
+      state.allResults = [...state.allResults, ...results]
       results.forEach((book: IBook) => {
         book.bookshelves.forEach((category: string) => {
           const categoryIndex = state.allCategories.findIndex((c) => c.name === category)
@@ -73,11 +82,21 @@ export const booksySlice = createSlice({
           }
         })
       })
+      // console.log(state.allResults)
+    },
+    toggleFavourite: (state, action: PayloadAction<IBook>) => {
+      const { id } = action.payload
+      const favouriteIndex = state.favourites.findIndex((book) => book.id === id)
+      if (favouriteIndex === -1) {
+        state.favourites.push(action.payload)
+      } else {
+        state.favourites.splice(favouriteIndex, 1)
+      }
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { resetBooks, setBooksy, addResults } = booksySlice.actions
+export const { resetBooks, setBooksy, addResults, toggleFavourite } = booksySlice.actions
 
 export default booksySlice.reducer
