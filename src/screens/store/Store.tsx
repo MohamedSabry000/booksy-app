@@ -25,7 +25,7 @@ const Store: React.FC = () => {
       setBooks(shelf ? shelf.books : []);
       refBtn.current && (shelf.books.length > page * 12 ? refBtn.current.disabled = false : refBtn.current.disabled = true);
     } else {
-      console.log(allResults);
+      // console.log(allResults);
       setBooks(allResults);
       refBtn.current && (allResults.length > page * 12 ? refBtn.current.disabled = false : refBtn.current.disabled = true);
     }
@@ -35,7 +35,7 @@ const Store: React.FC = () => {
     if(books.length > (page) * 12) {
       setPage(page + 1);
     } else {
-      console.log("API page: ", apiPage);
+      // console.log("API page: ", apiPage);
       !shelfName && getBooksPage(apiPage).then((res: any) => {
         dispatch(addResults(res));
         setPage(page + 1);

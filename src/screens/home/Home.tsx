@@ -19,7 +19,7 @@ const Home: React.FC = () => {
       </div>
       {
         allCategories.map(({name, books}: {name: string, books: Array<IBook>}) =>
-          books.length > 4 && <Shelf name={name} />
+          books.length > 4 && <Shelf name={name} key={name} />
         )
       }
       <h1>Home</h1>

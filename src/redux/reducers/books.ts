@@ -64,7 +64,7 @@ export const booksySlice = createSlice({
     },
     addResults: (state, action: PayloadAction<IGutendex>) => {
       const { count, next, previous, results } = action.payload
-      console.log(action.payload)
+      // console.log(action.payload)
       state.apiPage += 1
       state.next = next
       state.previous = previous
