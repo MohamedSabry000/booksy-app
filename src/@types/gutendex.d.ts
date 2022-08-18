@@ -13,7 +13,9 @@ export interface IBook {
   languages: Array<string>,
   copyright: boolean,
   media_type: string,
-  formats : Object,
+  formats : {
+    'image/jpeg': string,
+  },
   download_count: number
 }
 

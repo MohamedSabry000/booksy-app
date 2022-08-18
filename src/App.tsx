@@ -6,7 +6,11 @@ import { getGutendex } from './api';
 import { resetBooks, setBooksy } from './redux/reducers/books';
 
 import Home from './screens/home/Home';
+import Book from './screens/book/Book';
 import Error from './screens/error/Error';
+import Favourites from './screens/fav/Favourites';
+import Navbar from './components/nav/Navbar';
+
 
 function App() {
   const [error, setError] = React.useState("");
@@ -25,10 +29,18 @@ function App() {
   } , []);
 
   return (
+    <>
+    <Navbar />
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/error" element={<Error message={error} />} />
+      {error? <Route index element={<Error message={error} />} />
+      : <>
+          <Route index element={<Home />} />
+          <Route path="book/:id" element={<Book />} />
+          <Route path="fav" element={<Favourites />} />
+        </>
+      }
     </Routes>
+    </>
   );
 }
 

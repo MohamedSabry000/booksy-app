@@ -10,11 +10,16 @@ export const getGutendex = async (): Promise<IGutendex> => {
   return data;
 }
 
-// export const getList = async (query: string) : Promise<IYoutube[]> => {
-//   const {data} = await youtube.get('/', {
-//     params: {
-//       q: query
-//     }
-//   });
-//   return data?.items;
-// }
+export const getBook = async (id: string): Promise<IBook> => {
+  const { data } = await gutendex.get(`/${id}`);
+  return data;
+}
+
+export const getBooksPage = async (page: number): Promise<IGutendex> => {
+  const { data } = await gutendex.get('/', {
+    params: {
+      page,
+    },
+  });
+  return data;
+}
