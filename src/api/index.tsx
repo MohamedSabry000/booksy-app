@@ -2,7 +2,7 @@ import axios from "axios";
 import { IGutendex, IBook } from '../@types/gutendex';
 
 const gutendex = axios.create({
-  baseURL: 'http://gutendex.com/books',
+  baseURL: 'https://gutendex.com/books',
 } as any);
 
 export const getGutendex = async (): Promise<IGutendex> => {
