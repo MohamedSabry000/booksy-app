@@ -47,7 +47,7 @@ const Store: React.FC = () => {
 
   return (
     <>
-      <PageTitle title={shelfName ? shelfName : 'All Books'} />
+      <PageTitle title={shelfName ? shelfName.split('-').join(' ') : 'All Books'} />
       <div className="flex justify-center items-center mt-4">
         <div className="container mx-auto">
           <div className="flex flex-row justify-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
