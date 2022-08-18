@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from '../../assets/logo.png'
 
 export default function Navbar() {
+  const [search, setSearch] = React.useState("");
+  const naigate = useNavigate();
   return (
     <>
       <nav className="bg-gray-800">
@@ -63,14 +65,29 @@ export default function Navbar() {
                   alt="Workflow"
                 />
               </Link>
-              <div className="hidden sm:block sm:ml-6">
-                <div className="flex space-x-4">
-                <input
-                  className="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                  type="text"
-                  placeholder="Search for projects"
-                  aria-label="Search"
-                />
+              <div className="hidden sm:block sm:ml-6 flex-1 sm:flex sm:items-center sm:justify-between">
+                <div className="flex space-x-4 flex-1">
+                  <input
+                    className="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search for projects"
+                    aria-label="Search"
+                  />
+                  <button onClick={() => naigate(`/search/${search}`)} className="flex-shrink-0 inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-purple-500 border-0 rounded-md shadow-sm hover:bg-purple-400 focus:outline-none focus:shadow-outline-purple focus:border-purple-300 focus:shadow-outline-purple">
+                    <svg
+                      className="h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
 
                 </div>
               </div>

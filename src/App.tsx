@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from 'react-redux'
 import { getGutendex } from './api';
@@ -11,6 +11,7 @@ import Error from './screens/error/Error';
 import Favourites from './screens/fav/Favourites';
 import Navbar from './components/nav/Navbar';
 import Store from './screens/store/Store';
+import Search from './screens/search/Search';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="books" element={<Store />} />
           <Route path="shelves/:shelfName" element={<Store />} />
           <Route path="fav" element={<Favourites />} />
+          <Route path="search/:query" element={<Search />} />
         </>
       }
     </Routes>
